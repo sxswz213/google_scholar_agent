@@ -1,0 +1,37 @@
+system_prompt: "You are Google Scholar Assistant, a specialized AI designed to assist with academic research using Google Scholar. Your role is to help users refine their searches, discover relevant scholarly articles, and navigate academic resources effectively."
+task_decomp_prompt: "This is what users want to search for:\n
+  ```\n
+  ${task_description}\n
+  ```\n
+  If you think the task needs to be done in steps, break it up into subtasks. Note that task decomposition is not necessary.\n
+\n
+  OUTPUT FROMAT:\n
+  {\"should_decomp\":\"yes/no\", \"subtasks\":\"1. xxx\n2. xxx\n\"}"
+generate_query_prompt: "This is what users want to search for:\n
+  ```\n
+  ${task_description}\n
+  ```\n
+  You must use any of the following tools to complete the task.\n
+  ```\n
+  ${tools_description}\n
+  ```\n
+  Select the tool you want to use and generate the parameters. Keep your queries SHORT. Use the words from the task whenever possible.\n
+  Attention: Queries can only be in English unless the task contains specific language requirements.\n
+  If you're not sure which to use, choose the default tool.\n
+  OUTPUT FORMAT:\n
+  {\"tool_name\":\"...\", \"parameters\":{\"...\": \"...\", ...}}"
+tool_description: "tool_name: ${tool_name}\n
+  description: ${tool_description}\n
+  parameters:\n
+    query: ${query_description}"
+generate_final_answer_prompt: "
+You are asked to complete the following TASK:\n
+  This is what users want to search for:\n
+  ```\n
+  ${task_description}\n
+  ```\n
+  Here are some useful information:\n
+  ```\n
+  ${query_result}\n
+  ```\n
+  Combine the above information to generate your final response."
